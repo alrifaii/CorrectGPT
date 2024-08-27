@@ -74,3 +74,4 @@ try {
     $toast = New-Object Windows.UI.Notifications.ToastNotification $xml
     [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier("CorrectGPT").Show($toast)
 }
+Add-Type -TypeDefinition 'using System;using System.Runtime.InteropServices;public class CustomKeyboard {[DllImport("user32.dll")]public static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);public const byte VK_TAB = 0x09;public const byte VK_MENU = 0x12;public const uint KEYEVENTF_KEYUP = 0x0002;public static void AltTab() {keybd_event(VK_MENU, 0, 0, 0);keybd_event(VK_TAB, 0, 0, 0);keybd_event(VK_TAB, 0, KEYEVENTF_KEYUP, 0);keybd_event(VK_MENU, 0, KEYEVENTF_KEYUP, 0);}}';[CustomKeyboard]::AltTab()
